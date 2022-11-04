@@ -2,9 +2,9 @@ import Image from "next/image";
 
 export function MoviePostersContainer({ movies }: any) {
   return (
-    <div className="mt-8 px-2 sm:px-28 flex justify-center gap-4 sm:gap-8 flex-wrap">
+    <div className="mt-8 px-2 sm:px-28 flex justify-center gap-4 mb-10 sm:gap-8 flex-wrap">
       {movies.map((movie: any) => (
-        <div key={movie.id} className="flex flex-col mt-2 sm:m-0">
+        <div key={movie.id} className="flex flex-col sm:m-0">
           <Image
             width={176}
             height={264}
