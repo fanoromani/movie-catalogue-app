@@ -4,19 +4,20 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        purple:{
-          400: '#5C16C5',
-          900: '#2D0C5E'
+        purple: {
+          400: "#5C16C5",
+          900: "#2D0C5E",
         },
 
         gray: {
-          200: '#646464',
-          400: '#323232'
+          100: "#E5E5E5",
+          200: "#646464",
+          400: "#323232",
         },
 
-        highlight: '#D18000',
-      }
+        highlight: "#D18000",
+      },
     },
   },
   plugins: [],
-}
+};
