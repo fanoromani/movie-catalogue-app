@@ -45,6 +45,13 @@ export default function Movie() {
   }, [route]);
   console.log(trailerData);
 
+  const getTrailer = () => {
+    const trailer = trailerData.results.find(
+      (trailer: any) => trailer.name === "Official Trailer"
+    );
+    return trailer.key;
+  };
+
   return (
     <div className="bg-gray-100">
       <Header />
@@ -63,7 +70,7 @@ export default function Movie() {
               allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture full"
               width="100%"
               height="100%"
-              src={`https://www.youtube.com/embed/${trailerData.results[0].key}?autoplay=0&origin=http://example.com&controls=0&rel=1`}
+              src={`https://www.youtube.com/embed/${getTrailer()}?autoplay=0&origin=http://example.com&controls=0&rel=1`}
               frameBorder="0"
             ></iframe>
           )}
