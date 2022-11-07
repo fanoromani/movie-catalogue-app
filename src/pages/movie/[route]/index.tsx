@@ -7,7 +7,7 @@ import { MovieCast } from "../../../components/MovieCast";
 import { MovieDetails } from "../../../components/MovieDetails";
 import { Recomendations } from "../../../components/Recomendations";
 
-const API_KEY = "?api_key=6b121c5159d8b0bbc6a63fc1bb6f3fe0&language=en-US";
+const API_KEY = process.env.NEXT_PUBLIC_DB_API_KEY;
 
 export default function Movie() {
   const [movieData, setMovieData] = useState();
@@ -22,19 +22,19 @@ export default function Movie() {
   useEffect(() => {
     const callApi = async () => {
       const { data: movieData } = await axios(
-        `https://api.themoviedb.org/3/movie/${route}${API_KEY}`
+        `https://api.themoviedb.org/3/movie/${route}?api_key=${API_KEY}&language=en-US`
       );
       setMovieData(movieData);
       const { data: creditsData } = await axios(
-        `https://api.themoviedb.org/3/movie/${route}/credits${API_KEY}`
+        `https://api.themoviedb.org/3/movie/${route}/credits?api_key=${API_KEY}&language=en-US`
       );
       setCreditsData(creditsData);
       const { data: recomendationsData } = await axios(
-        `https://api.themoviedb.org/3/movie/${route}/recommendations${API_KEY}&page=1`
+        `https://api.themoviedb.org/3/movie/${route}/recommendations?api_key=${API_KEY}&language=en-US`
       );
       setRecomendationsData(recomendationsData);
       const { data: trailerData } = await axios(
-        `https://api.themoviedb.org/3/movie/${route}/videos${API_KEY}`
+        `https://api.themoviedb.org/3/movie/${route}/videos?api_key=${API_KEY}&language=en-US`
       );
       setTrailerData(trailerData);
     };
@@ -51,16 +51,18 @@ export default function Movie() {
       {movieData && (
         <MovieDetails movieData={movieData} creditsData={creditsData} />
       )}
-      <div className="px-28 pb-96">
+      <div className="px-4 md:px-28 pb-96">
         {creditsData && <MovieCast cast={creditsData} />}
 
         <div>
           <div className="text-2xl font-bold mb-6">Trailer</div>
           {trailerData && (
             <iframe
+              className="md:w-full h-96 lg:w-[900px] lg:h-[500px]"
               id="ytplayer"
-              width="900"
-              height="500"
+              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture full"
+              width="100%"
+              height="100%"
               src={`https://www.youtube.com/embed/${trailerData.results[0].key}?autoplay=0&origin=http://example.com&controls=0&rel=1`}
               frameBorder="0"
             ></iframe>

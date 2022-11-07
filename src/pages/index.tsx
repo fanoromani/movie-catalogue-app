@@ -11,11 +11,12 @@ export default function Home() {
   const [movies, setMovies] = useState<any[]>([]);
   const [genres, setGenres] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const API_KEY = process.env.NEXT_PUBLIC_DB_API_KEY;
 
   useEffect(() => {
     const callApi = async () => {
       const response = await axios(
-        `https://api.themoviedb.org/3/movie/popular?api_key=6b121c5159d8b0bbc6a63fc1bb6f3fe0`,
+        `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`,
         {
           params: {
             page: currentPage,
@@ -31,7 +32,7 @@ export default function Home() {
   useEffect(() => {
     const callApi = async () => {
       const response = await axios(
-        `https://api.themoviedb.org/3/genre/movie/list?api_key=6b121c5159d8b0bbc6a63fc1bb6f3fe0&language=en-US`
+        `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`
       );
       setGenres(response.data.genres);
     };

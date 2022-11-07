@@ -14,15 +14,17 @@ function padTo2Digits(num: number) {
 
 export function MovieDetails({ movieData, creditsData }: any) {
   return (
-    <div className="bg-purple-900 text-white flex pt-20 px-28 flex-1 h-fit justify-center items-center">
-      <div className="flex-1 flex gap-8 mb-[-48px]">
-        <Image
-          className="rounded-lg drop-shadow-2xl"
-          width={383}
-          height={474}
-          src={`https://image.tmdb.org/t/p/original${movieData.poster_path}`}
-          alt=""
-        />
+    <div className="bg-purple-900 text-white flex pt-8 md:pt-20 pb-4 px-4 lg:px-28 md:px-12">
+      <div className="flex gap-8 pb-8 flex-col md:flex-row">
+        <div className="md:mb-[-70px] m-auto">
+          <Image
+            className="rounded-lg drop-shadow-2xl h-72 w-44 md:min-h-[576px] md:min-w-[384px]"
+            width={383}
+            height={474}
+            src={`https://image.tmdb.org/t/p/original${movieData.poster_path}`}
+            alt=""
+          />
+        </div>
         <div className="max-w-2xl">
           <strong className="text-2xl">{movieData.title} •</strong>
           <span className="text-2xl">
@@ -57,24 +59,24 @@ export function MovieDetails({ movieData, creditsData }: any) {
               <h2 className="font-bold text-xl mt-8">Synopsis</h2>
               <p className="pt-2">{movieData.overview}</p>
             </div>
-            <div className="flex flex-wrap gap-6 mt-6">
-              <div className="mr-20">
+            <div className="flex flex-wrap gap-6 gap-x-14 mt-6">
+              <div>
                 <strong className="block">Rob Liefeld</strong>
                 <span>Characters</span>
               </div>
-              <div className="mr-20">
+              <div>
                 <strong className="block">Rob Liefeld</strong>
                 <span>Characters</span>
               </div>
-              <div className="mr-20">
+              <div>
                 <strong className="block">Rob Liefeld</strong>
                 <span>Characters</span>
               </div>
-              <div className="mr-20">
+              <div>
                 <strong className="block">Rob Liefeld</strong>
                 <span>Characters</span>
               </div>
-              <div className="mr-20">
+              <div>
                 <strong className="block">Rob Liefeld</strong>
                 <span>Characters</span>
               </div>
