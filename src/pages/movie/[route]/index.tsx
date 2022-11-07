@@ -12,7 +12,7 @@ const API_KEY = process.env.NEXT_PUBLIC_DB_API_KEY;
 export default function Movie() {
   const [movieData, setMovieData] = useState();
   const [creditsData, setCreditsData] = useState();
-  const [recomendationsData, setRecomendationsData] = useState();
+  const [recomendationsData, setRecomendationsData] = useState<any>();
   const [trailerData, setTrailerData] = useState<any>();
 
   const router = useRouter();
@@ -46,9 +46,16 @@ export default function Movie() {
   console.log(trailerData);
 
   const getTrailer = () => {
+    if (!trailerData) return;
     const trailer = trailerData.results.find(
       (trailer: any) => trailer.name === "Official Trailer"
     );
+
+    if (!trailer && trailerData.results[0]) {
+      return trailerData.results[0].key;
+    }
+
+    if (!trailer) return;
     return trailer.key;
   };
 
@@ -63,7 +70,8 @@ export default function Movie() {
 
         <div>
           <div className="text-2xl font-bold mb-6">Trailer</div>
-          {trailerData && (
+          {!getTrailer() && <p>Trailer is unavailable ☹</p>}
+          {getTrailer() && (
             <iframe
               className="md:w-full h-96 lg:w-[900px] lg:h-[500px]"
               id="ytplayer"
@@ -77,6 +85,9 @@ export default function Movie() {
         </div>
         {recomendationsData && (
           <Recomendations recomendationsData={recomendationsData} />
+        )}
+        {recomendationsData.results.length === 0 && (
+          <p className="mt-8">No Recommendations ☹</p>
         )}
       </div>
     </div>

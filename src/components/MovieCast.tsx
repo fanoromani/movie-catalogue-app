@@ -15,7 +15,7 @@ export function MovieCast({ cast }: any) {
               width={176}
               height={224}
               src={`https://image.tmdb.org/t/p/original${castMember.profile_path}`}
-              alt=""
+              alt="Picture unavailable ☹"
             />
             <strong className="mt-4 mb-2">{castMember.name}</strong>
             <span>{castMember.character}</span>

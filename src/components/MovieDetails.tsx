@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { useRouter } from "next/router";
 
 function toHoursAndMinutes(totalMinutes: number) {
   const minutes = totalMinutes % 60;
@@ -13,6 +12,31 @@ function padTo2Digits(num: number) {
 }
 
 export function MovieDetails({ movieData, creditsData }: any) {
+  const getCrew = () => {
+    if (!creditsData) return [];
+
+    const producer = creditsData.crew.find(
+      (crewMember: any) => crewMember.job === "Producer"
+    );
+    const director = creditsData.crew.find(
+      (crewMember: any) => crewMember.job === "Director"
+    );
+    const screenPlay = creditsData.crew.find(
+      (crewMember: any) => crewMember.job === "Screenplay"
+    );
+    const writer = creditsData.crew.find(
+      (crewMember: any) => crewMember.job === "Writer"
+    );
+    const editor = creditsData.crew.find(
+      (crewMember: any) => crewMember.job === "Editor"
+    );
+    return [producer, director, screenPlay, writer, editor].filter(
+      (element) => element
+    );
+  };
+
+  console.log(getCrew());
+
   return (
     <div className="bg-purple-900 text-white flex pt-8 md:pt-20 pb-4 px-4 lg:px-28 md:px-12">
       <div className="flex gap-8 pb-8 flex-col md:flex-row">
@@ -60,27 +84,35 @@ export function MovieDetails({ movieData, creditsData }: any) {
               <p className="pt-2">{movieData.overview}</p>
             </div>
             <div className="flex flex-wrap gap-6 gap-x-14 mt-6">
-              <div>
-                <strong className="block">Rob Liefeld</strong>
-                <span>Characters</span>
-              </div>
-              <div>
-                <strong className="block">Rob Liefeld</strong>
-                <span>Characters</span>
-              </div>
-              <div>
-                <strong className="block">Rob Liefeld</strong>
-                <span>Characters</span>
-              </div>
-              <div>
-                <strong className="block">Rob Liefeld</strong>
-                <span>Characters</span>
-              </div>
-              <div>
-                <strong className="block">Rob Liefeld</strong>
-                <span>Characters</span>
-              </div>
+              {getCrew().map((crewMember) => (
+                <div key={crewMember.id} className="w-40">
+                  <strong className="block">{crewMember.name}</strong>
+                  <span>{crewMember.job}</span>
+                </div>
+              ))}
             </div>
+            {/* <div className="flex flex-wrap gap-6 gap-x-14 mt-6">
+              <div>
+                <strong className="block">Rob Liefeld</strong>
+                <span>Characters</span>
+              </div>
+              <div>
+                <strong className="block">Rob Liefeld</strong>
+                <span>Characters</span>
+              </div>
+              <div>
+                <strong className="block">Rob Liefeld</strong>
+                <span>Characters</span>
+              </div>
+              <div>
+                <strong className="block">Rob Liefeld</strong>
+                <span>Characters</span>
+              </div>
+              <div>
+                <strong className="block">Rob Liefeld</strong>
+                <span>Characters</span>
+              </div>
+            </div> */}
           </div>
         </div>
       </div>
