@@ -11,12 +11,14 @@ export default function Home() {
   const [movies, setMovies] = useState<any[]>([]);
   const [genres, setGenres] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const API_KEY = process.env.NEXT_PUBLIC_DB_API_KEY;
+  const [filters, setFilters] = useState<any[]>([]);
+
+  const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
   useEffect(() => {
     const callApi = async () => {
       const response = await axios(
-        `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`,
+        `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&with_genres=${formatFilters()}`,
         {
           params: {
             page: currentPage,
@@ -27,7 +29,7 @@ export default function Home() {
     };
     callApi();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage]);
+  }, [currentPage, filters]);
 
   useEffect(() => {
     const callApi = async () => {
@@ -39,6 +41,21 @@ export default function Home() {
     callApi();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  /* useEffect(() => {
+    const callApi = async () => {
+      const response = await axios(
+        `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${formatFilters()}`
+      );
+      setMovies(response.data.results);
+    };
+    callApi();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filters]); */
+
+  const formatFilters = () => {
+    return filters.join();
+  };
 
   const getPages = () => {
     if (currentPage === 1) {
@@ -56,6 +73,16 @@ export default function Home() {
     ];
   };
 
+  const addFilter = (newFilter: string) => {
+    if (filters.includes(newFilter)) {
+      setFilters(filters.filter((genre) => genre !== newFilter));
+    } else {
+      setFilters((arr: any) => [...arr, newFilter]);
+    }
+  };
+
+  console.log(filters);
+
   return (
     <div>
       <Header />
@@ -67,9 +94,12 @@ export default function Home() {
             <span className="block sm:inline">Explore now.</span>
           </h1>
 
-          {genres.length > 0 && <FilterSection genres={genres} />}
+          {genres.length > 0 && (
+            <FilterSection genres={genres} addFilter={addFilter} />
+          )}
         </div>
       </div>
+
       {movies.length > 0 && <MoviePostersContainer movies={movies} />}
 
       <div className="mb-5 sm:mb-40 flex justify-center">

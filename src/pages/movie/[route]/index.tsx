@@ -7,7 +7,7 @@ import { MovieCast } from "../../../components/MovieCast";
 import { MovieDetails } from "../../../components/MovieDetails";
 import { Recomendations } from "../../../components/Recomendations";
 
-const API_KEY = process.env.NEXT_PUBLIC_DB_API_KEY;
+const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
 export default function Movie() {
   const [movieData, setMovieData] = useState();
@@ -86,7 +86,7 @@ export default function Movie() {
         {recomendationsData && (
           <Recomendations recomendationsData={recomendationsData} />
         )}
-        {recomendationsData.results.length === 0 && (
+        {recomendationsData && recomendationsData.results.length === 0 && (
           <p className="mt-8">No Recommendations ☹</p>
         )}
       </div>
