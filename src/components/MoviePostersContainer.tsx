@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
+import { MovieType } from "../types";
 
-export function MoviePostersContainer({ movies }: any) {
+export function MoviePostersContainer({ movies }: { movies: MovieType[] }) {
   return (
     <div className="mt-8 px-2 sm:px-28 flex justify-center gap-4 mb-10 sm:gap-8 flex-wrap">
       {movies.map((movie: any) => (

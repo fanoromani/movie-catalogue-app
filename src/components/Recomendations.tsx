@@ -1,7 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Recomendation } from "../types";
 
-export function Recomendations({ recomendationsData }: any) {
+export function Recomendations({
+  recomendationsData,
+}: {
+  recomendationsData: Recomendation;
+}) {
   return (
     <div className="mt-16">
       <h1 className="text-2xl font-bold">Recomendations</h1>

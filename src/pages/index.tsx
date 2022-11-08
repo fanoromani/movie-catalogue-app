@@ -6,12 +6,13 @@ import arrowRight from "../assets/Arrow-right.png";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { MovieType, Genre } from "../types";
 
 export default function Home() {
-  const [movies, setMovies] = useState<any[]>([]);
-  const [genres, setGenres] = useState<any[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [filters, setFilters] = useState<any[]>([]);
+  const [movies, setMovies] = useState<MovieType[]>([]);
+  const [genres, setGenres] = useState<Genre[]>([]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [filters, setFilters] = useState<number[]>([]);
 
   const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
@@ -42,17 +43,6 @@ export default function Home() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  /* useEffect(() => {
-    const callApi = async () => {
-      const response = await axios(
-        `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${formatFilters()}`
-      );
-      setMovies(response.data.results);
-    };
-    callApi();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filters]); */
-
   const formatFilters = () => {
     return filters.join();
   };
@@ -73,7 +63,7 @@ export default function Home() {
     ];
   };
 
-  const addFilter = (newFilter: string) => {
+  const addFilter = (newFilter: number) => {
     if (filters.includes(newFilter)) {
       setFilters(filters.filter((genre) => genre !== newFilter));
       setCurrentPage(1);

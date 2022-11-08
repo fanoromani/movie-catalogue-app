@@ -1,6 +1,7 @@
 import Image from "next/image";
+import { Credits } from "../types";
 
-export function MovieCast({ cast }: any) {
+export function MovieCast({ cast }: { cast: Credits }) {
   return (
     <div className="mt-20 mb-20">
       <h1 className="text-2xl font-bold">Original Cast</h1>

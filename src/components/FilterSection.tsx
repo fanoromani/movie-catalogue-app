@@ -1,16 +1,14 @@
-import { useState } from "react";
+import { Genre } from "../types";
 
 export function FilterSection({
   genres,
   filters,
   addFilter,
 }: {
-  genres: any[];
+  genres: Genre[];
   filters: number[];
   addFilter: Function;
 }) {
-  const [filterColor, setFilterColor] = useState("white");
-
   return (
     <div className="flex sm:items-center mt-10 flex-col">
       <span className="font-bold text-sm uppercase mb-4 ">filter by:</span>

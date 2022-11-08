@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { MovieType, Credits } from "../types";
 
 function toHoursAndMinutes(totalMinutes: number) {
   const minutes = totalMinutes % 60;
@@ -11,7 +12,13 @@ function padTo2Digits(num: number) {
   return num.toString().padStart(2, "0");
 }
 
-export function MovieDetails({ movieData, creditsData }: any) {
+export function MovieDetails({
+  movieData,
+  creditsData,
+}: {
+  movieData: MovieType;
+  creditsData: Credits;
+}) {
   const getCrew = () => {
     if (!creditsData) return [];
 
@@ -84,35 +91,13 @@ export function MovieDetails({ movieData, creditsData }: any) {
               <p className="pt-2">{movieData.overview}</p>
             </div>
             <div className="flex flex-wrap gap-6 gap-x-14 mt-6">
-              {getCrew().map((crewMember) => (
+              {getCrew().map((crewMember: any) => (
                 <div key={crewMember.id} className="w-40">
                   <strong className="block">{crewMember.name}</strong>
                   <span>{crewMember.job}</span>
                 </div>
               ))}
             </div>
-            {/* <div className="flex flex-wrap gap-6 gap-x-14 mt-6">
-              <div>
-                <strong className="block">Rob Liefeld</strong>
-                <span>Characters</span>
-              </div>
-              <div>
-                <strong className="block">Rob Liefeld</strong>
-                <span>Characters</span>
-              </div>
-              <div>
-                <strong className="block">Rob Liefeld</strong>
-                <span>Characters</span>
-              </div>
-              <div>
-                <strong className="block">Rob Liefeld</strong>
-                <span>Characters</span>
-              </div>
-              <div>
-                <strong className="block">Rob Liefeld</strong>
-                <span>Characters</span>
-              </div>
-            </div> */}
           </div>
         </div>
       </div>

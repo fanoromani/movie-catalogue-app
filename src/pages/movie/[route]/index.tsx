@@ -1,19 +1,19 @@
 import axios from "axios";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Header } from "../../../components/Header";
 import { MovieCast } from "../../../components/MovieCast";
 import { MovieDetails } from "../../../components/MovieDetails";
 import { Recomendations } from "../../../components/Recomendations";
+import { MovieType, Credits, Recomendation, Trailer } from "../../../types";
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
 export default function Movie() {
-  const [movieData, setMovieData] = useState();
-  const [creditsData, setCreditsData] = useState();
-  const [recomendationsData, setRecomendationsData] = useState<any>();
-  const [trailerData, setTrailerData] = useState<any>();
+  const [movieData, setMovieData] = useState<MovieType>();
+  const [creditsData, setCreditsData] = useState<Credits>();
+  const [recomendationsData, setRecomendationsData] = useState<Recomendation>();
+  const [trailerData, setTrailerData] = useState<Trailer>();
 
   const router = useRouter();
   const { route } = router.query;
@@ -61,7 +61,7 @@ export default function Movie() {
   return (
     <div className="bg-gray-100">
       <Header />
-      {movieData && (
+      {movieData && creditsData && (
         <MovieDetails movieData={movieData} creditsData={creditsData} />
       )}
       <div className="px-4 md:px-28 pb-96">
