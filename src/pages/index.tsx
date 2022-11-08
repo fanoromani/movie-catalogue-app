@@ -76,8 +76,10 @@ export default function Home() {
   const addFilter = (newFilter: string) => {
     if (filters.includes(newFilter)) {
       setFilters(filters.filter((genre) => genre !== newFilter));
+      setCurrentPage(1);
     } else {
       setFilters((arr: any) => [...arr, newFilter]);
+      setCurrentPage(1);
     }
   };
 
@@ -95,7 +97,11 @@ export default function Home() {
           </h1>
 
           {genres.length > 0 && (
-            <FilterSection genres={genres} addFilter={addFilter} />
+            <FilterSection
+              genres={genres}
+              addFilter={addFilter}
+              filters={filters}
+            />
           )}
         </div>
       </div>

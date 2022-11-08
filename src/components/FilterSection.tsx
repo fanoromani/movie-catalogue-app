@@ -2,9 +2,11 @@ import { useState } from "react";
 
 export function FilterSection({
   genres,
+  filters,
   addFilter,
 }: {
   genres: any[];
+  filters: number[];
   addFilter: Function;
 }) {
   const [filterColor, setFilterColor] = useState("white");
@@ -17,7 +19,11 @@ export function FilterSection({
         {genres.map((genre) => (
           <button
             key={genre.id}
-            className={`px-4 py-2 bg-white rounded text-black font-bold hover:bg-gray-300`}
+            className={`px-4 py-2 rounded font-bold hover:bg-gray-300 ${
+              filters.includes(genre.id)
+                ? "bg-highlight text-white"
+                : "bg-white text-black"
+            }`}
             onClick={() => {
               addFilter(genre.id);
             }}
