@@ -17,7 +17,6 @@ export default function Movie() {
 
   const router = useRouter();
   const { route } = router.query;
-  console.log(route);
 
   useEffect(() => {
     const callApi = async () => {
@@ -78,7 +77,7 @@ export default function Movie() {
               allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture full"
               width="100%"
               height="100%"
-              src={`https://www.youtube.com/embed/${getTrailer()}?autoplay=0&origin=http://example.com&controls=0&rel=1`}
+              src={`https://www.youtube.com/embed/${getTrailer()}?autoplay=0&origin=http://example.com&controls=1&rel=1`}
               frameBorder="0"
             ></iframe>
           )}
