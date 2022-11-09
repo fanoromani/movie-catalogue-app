@@ -95,7 +95,10 @@ export default function Home() {
       <div className="mb-5 sm:mb-40 flex justify-center">
         <button
           className="text-purple-400 px-4 py-2 font-bold hover:bg-slate-100 rounded-full"
-          onClick={() => setCurrentPage(currentPage - 1)}
+          onClick={() => {
+            window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+            setCurrentPage(currentPage - 1);
+          }}
         >
           <Image width={24} height={24} src={arrowLeft} alt="" />
         </button>
@@ -107,14 +110,20 @@ export default function Home() {
                 ? "text-purple-900 bg-slate-100"
                 : "text-purple-400"
             }`}
-            onClick={() => setCurrentPage(page)}
+            onClick={() => {
+              window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+              setCurrentPage(page);
+            }}
           >
             {page}
           </button>
         ))}
         <button
           className="text-purple-400 px-4 py-2 font-bold hover:bg-slate-100 rounded-full"
-          onClick={() => setCurrentPage(currentPage + 1)}
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            setCurrentPage(currentPage + 1);
+          }}
         >
           <Image width={24} height={24} src={arrowRight} alt="" />
         </button>
