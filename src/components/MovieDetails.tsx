@@ -15,9 +15,11 @@ function padTo2Digits(num: number) {
 export function MovieDetails({
   movieData,
   creditsData,
+  loading,
 }: {
   movieData: MovieType;
   creditsData: Credits;
+  loading: boolean;
 }) {
   const getCrew = () => {
     if (!creditsData) return [];

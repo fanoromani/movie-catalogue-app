@@ -15,32 +15,54 @@ export default function Movie() {
   const [creditsData, setCreditsData] = useState<Credits>();
   const [recomendationsData, setRecomendationsData] = useState<Recomendation>();
   const [trailerData, setTrailerData] = useState<Trailer>();
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<boolean>();
 
   const router = useRouter();
   const { route } = router.query;
 
   useEffect(() => {
     const callApi = async () => {
-      const [
-        movieDataResponse,
-        creditsDataResponse,
-        recomendationsDataResponse,
-        trailerDataResponse,
-      ] = await Promise.all([
-        api.get(`${route}?api_key=${API_KEY}&language=en-US`),
-        api.get(`${route}/credits?api_key=${API_KEY}&language=en-US`),
-        api.get(`${route}/recommendations?api_key=${API_KEY}&language=en-US`),
-        api.get(`${route}/videos?api_key=${API_KEY}&language=en-US`),
-      ]);
-      setMovieData(movieDataResponse.data);
-      setCreditsData(creditsDataResponse.data);
-      setRecomendationsData(recomendationsDataResponse.data);
-      setTrailerData(trailerDataResponse.data);
+      setLoading(true);
+      setError(false);
+      try {
+        const [
+          movieDataResponse,
+          creditsDataResponse,
+          recomendationsDataResponse,
+          trailerDataResponse,
+        ] = await Promise.all([
+          api.get(`${route}?api_key=${API_KEY}&language=en-US`),
+          api.get(`${route}/credits?api_key=${API_KEY}&language=en-US`),
+          api.get(`${route}/recommendations?api_key=${API_KEY}&language=en-US`),
+          api.get(`${route}/videos?api_key=${API_KEY}&language=en-US`),
+        ]);
+        setMovieData(movieDataResponse.data);
+        setCreditsData(creditsDataResponse.data);
+        setRecomendationsData(recomendationsDataResponse.data);
+        setTrailerData(trailerDataResponse.data);
+      } catch (err) {
+        setError(true);
+        console.log(err);
+      } finally {
+        setLoading(false);
+      }
     };
     if (route) {
-      callApi(); /*  */
+      callApi();
     }
   }, [route]);
+
+  /* setLoading(true);
+setError(false);
+try {
+  const resp =  await axios.get('/');
+  setData(resp.data)
+} catch (e) {
+  setError(true);
+} finally {
+  setLoading(false);
+} */
 
   const getTrailer = () => {
     if (!trailerData) return;
@@ -60,7 +82,11 @@ export default function Movie() {
     <div className="bg-gray-100">
       <Header />
       {movieData && creditsData && (
-        <MovieDetails movieData={movieData} creditsData={creditsData} />
+        <MovieDetails
+          movieData={movieData}
+          creditsData={creditsData}
+          loading={loading}
+        />
       )}
       <div className="px-4 md:px-28 pb-96">
         {creditsData && <MovieCast cast={creditsData} />}
