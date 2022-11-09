@@ -6,6 +6,7 @@ import { MovieCast } from "../../../components/MovieCast";
 import { MovieDetails } from "../../../components/MovieDetails";
 import { Recomendations } from "../../../components/Recomendations";
 import { MovieType, Credits, Recomendation, Trailer } from "../../../types";
+import { api } from "../../../lib/axios";
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
@@ -19,6 +20,29 @@ export default function Movie() {
   const { route } = router.query;
 
   useEffect(() => {
+    const callApi = async () => {
+      const [
+        movieDataResponse,
+        creditsDataResponse,
+        recomendationsDataResponse,
+        trailerDataResponse,
+      ] = await Promise.all([
+        api.get(`${route}?api_key=${API_KEY}&language=en-US`),
+        api.get(`${route}/credits?api_key=${API_KEY}&language=en-US`),
+        api.get(`${route}/recommendations?api_key=${API_KEY}&language=en-US`),
+        api.get(`${route}/videos?api_key=${API_KEY}&language=en-US`),
+      ]);
+      setMovieData(movieDataResponse.data);
+      setCreditsData(creditsDataResponse.data);
+      setRecomendationsData(recomendationsDataResponse.data);
+      setTrailerData(trailerDataResponse.data);
+    };
+    if (route) {
+      callApi(); /*  */
+    }
+  }, [route]);
+
+  /* useEffect(() => {
     const callApi = async () => {
       const { data: movieData } = await axios(
         `https://api.themoviedb.org/3/movie/${route}?api_key=${API_KEY}&language=en-US`
@@ -40,9 +64,7 @@ export default function Movie() {
     if (route) {
       callApi();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [route]);
-  console.log(trailerData);
+  }, [route]); */
 
   const getTrailer = () => {
     if (!trailerData) return;

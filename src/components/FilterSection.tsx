@@ -17,10 +17,10 @@ export function FilterSection({
         {genres.map((genre) => (
           <button
             key={genre.id}
-            className={`px-4 py-2 rounded font-bold hover:bg-gray-300 ${
+            className={`px-4 py-2 rounded font-bold ${
               filters.includes(genre.id)
-                ? "bg-highlight text-white"
-                : "bg-white text-black"
+                ? "bg-highlight-500 text-white hover:bg-highlight-700"
+                : "bg-white text-black hover:bg-gray-300"
             }`}
             onClick={() => {
               addFilter(genre.id);

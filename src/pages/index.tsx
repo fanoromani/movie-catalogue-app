@@ -1,11 +1,11 @@
-import { Header } from "../components/Header";
-import { FilterSection } from "../components/FilterSection";
-import { MoviePostersContainer } from "../components/MoviePostersContainer";
-import arrowLeft from "../assets/Arrow-left.png";
-import arrowRight from "../assets/Arrow-right.png";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import arrowLeft from "../assets/Arrow-left.png";
+import arrowRight from "../assets/Arrow-right.png";
+import { Header } from "../components/Header";
+import { FilterSection } from "../components/FilterSection";
+import { MoviePostersContainer } from "../components/MoviePostersContainer";
 import { MovieType, Genre } from "../types";
 
 export default function Home() {
@@ -48,12 +48,8 @@ export default function Home() {
   };
 
   const getPages = () => {
-    if (currentPage === 1) {
-      return [1, 2, 3, 4, 5];
-    }
-    if (currentPage === 2) {
-      return [1, 2, 3, 4, 5];
-    }
+    if (currentPage < 3) return [1, 2, 3, 4, 5];
+
     return [
       currentPage - 2,
       currentPage - 1,
@@ -72,8 +68,6 @@ export default function Home() {
       setCurrentPage(1);
     }
   };
-
-  console.log(filters);
 
   return (
     <div>
