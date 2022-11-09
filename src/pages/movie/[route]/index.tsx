@@ -42,30 +42,6 @@ export default function Movie() {
     }
   }, [route]);
 
-  /* useEffect(() => {
-    const callApi = async () => {
-      const { data: movieData } = await axios(
-        `https://api.themoviedb.org/3/movie/${route}?api_key=${API_KEY}&language=en-US`
-      );
-      setMovieData(movieData);
-      const { data: creditsData } = await axios(
-        `https://api.themoviedb.org/3/movie/${route}/credits?api_key=${API_KEY}&language=en-US`
-      );
-      setCreditsData(creditsData);
-      const { data: recomendationsData } = await axios(
-        `https://api.themoviedb.org/3/movie/${route}/recommendations?api_key=${API_KEY}&language=en-US`
-      );
-      setRecomendationsData(recomendationsData);
-      const { data: trailerData } = await axios(
-        `https://api.themoviedb.org/3/movie/${route}/videos?api_key=${API_KEY}&language=en-US`
-      );
-      setTrailerData(trailerData);
-    };
-    if (route) {
-      callApi();
-    }
-  }, [route]); */
-
   const getTrailer = () => {
     if (!trailerData) return;
     const trailer = trailerData.results.find(
