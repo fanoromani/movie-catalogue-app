@@ -91,22 +91,24 @@ try {
       <div className="px-4 md:px-28 pb-96">
         {creditsData && <MovieCast cast={creditsData} />}
 
-        <div>
-          <div className="text-2xl font-bold mb-6">Trailer</div>
-          {!loading && !getTrailer() && <p>Trailer is unavailable ☹</p>}
-          {!loading && getTrailer() && (
-            <iframe
-              loading="lazy"
-              className="md:w-full h-96 lg:w-[900px] lg:h-[500px]"
-              id="ytplayer"
-              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture full"
-              width="100%"
-              height="100%"
-              src={`https://www.youtube.com/embed/${getTrailer()}?autoplay=0&origin=http://example.com&controls=1&rel=1`}
-              frameBorder="0"
-            ></iframe>
-          )}
-        </div>
+        {!loading && (
+          <div>
+            <div className="text-2xl font-bold mb-6">Trailer</div>
+            {!getTrailer() && <p>Trailer is unavailable ☹</p>}
+            {getTrailer() && (
+              <iframe
+                loading="lazy"
+                className="md:w-full h-96 lg:w-[900px] lg:h-[500px]"
+                id="ytplayer"
+                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture full"
+                width="100%"
+                height="100%"
+                src={`https://www.youtube.com/embed/${getTrailer()}?autoplay=0&origin=http://example.com&controls=1&rel=1`}
+                frameBorder="0"
+              ></iframe>
+            )}
+          </div>
+        )}
         {recomendationsData && (
           <Recomendations recomendationsData={recomendationsData} />
         )}
