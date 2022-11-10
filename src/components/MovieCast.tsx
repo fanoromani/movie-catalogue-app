@@ -15,6 +15,7 @@ export function MovieCast({ cast }: { cast: Credits }) {
                 className="flex flex-col bg-white p-2 drop-shadow-lg rounded"
               >
                 <Image
+                  loading="lazy"
                   className="min-w-[176px] h-56 rounded drop-shadow-lg"
                   width={176}
                   height={224}

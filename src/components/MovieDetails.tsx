@@ -51,6 +51,7 @@ export function MovieDetails({
       <div className="flex gap-8 pb-8 flex-col md:flex-row">
         <div className="md:mb-[-70px] m-auto">
           <Image
+            loading="lazy"
             className="rounded-lg drop-shadow-2xl h-72 w-44 md:min-h-[576px] md:min-w-[384px]"
             width={383}
             height={474}

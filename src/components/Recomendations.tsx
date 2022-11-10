@@ -24,6 +24,7 @@ export function Recomendations({
                 }}
               >
                 <Image
+                  loading="lazy"
                   className="min-w-[176px] h-56 rounded drop-shadow-lg"
                   width={176}
                   height={224}

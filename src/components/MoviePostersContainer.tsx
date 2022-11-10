@@ -14,6 +14,7 @@ export function MoviePostersContainer({ movies }: { movies: MovieType[] }) {
             }}
           >
             <Image
+              loading="lazy"
               width={176}
               height={264}
               src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}

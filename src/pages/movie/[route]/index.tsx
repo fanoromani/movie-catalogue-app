@@ -93,9 +93,10 @@ try {
 
         <div>
           <div className="text-2xl font-bold mb-6">Trailer</div>
-          {!getTrailer() && <p>Trailer is unavailable ☹</p>}
-          {getTrailer() && (
+          {!loading && !getTrailer() && <p>Trailer is unavailable ☹</p>}
+          {!loading && getTrailer() && (
             <iframe
+              loading="lazy"
               className="md:w-full h-96 lg:w-[900px] lg:h-[500px]"
               id="ytplayer"
               allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture full"
