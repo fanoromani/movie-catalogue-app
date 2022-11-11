@@ -12,15 +12,12 @@ function padTo2Digits(num: number) {
   return num.toString().padStart(2, "0");
 }
 
-export function MovieDetails({
-  movieData,
-  creditsData,
-  loading,
-}: {
+interface MovieDetailsProps {
   movieData: MovieType;
   creditsData: Credits;
-  loading: boolean;
-}) {
+}
+
+export function MovieDetails({ movieData, creditsData }: MovieDetailsProps) {
   const getCrew = () => {
     if (!creditsData) return [];
 

@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Header } from "../../../components/Header";
@@ -16,7 +15,7 @@ export default function Movie() {
   const [recomendationsData, setRecomendationsData] = useState<Recomendation>();
   const [trailerData, setTrailerData] = useState<Trailer>();
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<boolean>();
+  const [error, setError] = useState<boolean>(false);
 
   const router = useRouter();
   const { route } = router.query;
@@ -53,17 +52,6 @@ export default function Movie() {
     }
   }, [route]);
 
-  /* setLoading(true);
-setError(false);
-try {
-  const resp =  await axios.get('/');
-  setData(resp.data)
-} catch (e) {
-  setError(true);
-} finally {
-  setLoading(false);
-} */
-
   const getTrailer = () => {
     if (!trailerData) return;
     const trailer = trailerData.results.find(
@@ -82,11 +70,7 @@ try {
     <div className="bg-gray-100">
       <Header />
       {movieData && creditsData && (
-        <MovieDetails
-          movieData={movieData}
-          creditsData={creditsData}
-          loading={loading}
-        />
+        <MovieDetails movieData={movieData} creditsData={creditsData} />
       )}
       <div className="px-4 md:px-28 pb-96">
         {creditsData && <MovieCast cast={creditsData} />}
@@ -109,6 +93,7 @@ try {
             )}
           </div>
         )}
+
         {recomendationsData && (
           <Recomendations recomendationsData={recomendationsData} />
         )}

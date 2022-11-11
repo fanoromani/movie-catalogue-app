@@ -1,14 +1,16 @@
 import { Genre } from "../types";
 
+interface FilterSectionProps {
+  genres: Genre[];
+  filters: number[];
+  addFilter: Function;
+}
+
 export function FilterSection({
   genres,
   filters,
   addFilter,
-}: {
-  genres: Genre[];
-  filters: number[];
-  addFilter: Function;
-}) {
+}: FilterSectionProps) {
   return (
     <div className="flex sm:items-center mt-10 flex-col">
       <span className="font-bold text-sm uppercase mb-4 ">filter by:</span>
