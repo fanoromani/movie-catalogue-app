@@ -1,9 +1,6 @@
 ## Check it out live here: 
 https://movie-catalogue-app-two.vercel.app/
 
-
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 ## Getting Started
 
 First, run the development server:
