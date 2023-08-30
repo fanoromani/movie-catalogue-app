@@ -1,4 +1,4 @@
-** Check it out live here: **
+## Check it out live here: 
 https://movie-catalogue-app-two.vercel.app/
 
 
